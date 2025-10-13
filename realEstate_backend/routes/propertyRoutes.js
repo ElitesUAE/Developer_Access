@@ -1,0 +1,61 @@
+// routes/propertyRoutes.js
+import express from "express";
+import {
+  createProperty,
+  getProperties,
+  getPropertyById,
+  updateProperty,
+  deleteProperty,
+  deletePropertyImage,
+  getHomePageProperties,
+  addToHomePage,
+  removeFromHomePage,
+  getAllPropertiesAdmin,
+  searchProperties,
+} from "../Controller/propertyController.js";
+import upload from "../middleware/uploadMiddleware.js";
+
+const router = express.Router();
+// Search route (POST for complex filter data)
+router.post("/search", searchProperties);
+// @route   POST /api/properties/create
+// @desc    Create a new property with multiple images
+// @access  Admin
+router.post("/create", upload.array("images", 50), createProperty);
+
+// Homepage routes
+router.get("/homepage", getHomePageProperties);
+
+// @route   GET /api/properties
+// @desc    Get all properties with optional filters
+// @access  Public
+// Query params: page, limit, city, location, propertyType, propertyStatus, minPrice, maxPrice, bhkCount, constructionStatus
+router.get("/", getProperties);
+
+// @route   GET /api/properties/admin/all
+// @desc    Get all properties for admin
+// @access  Private/Admin
+router.get("/admin/all", getAllPropertiesAdmin);
+
+// @route   GET /api/properties/:id
+// @desc    Get single property by ID
+// @access  Public
+router.get("/property/:id", getPropertyById);
+
+// @route   PUT /api/properties/:id
+// @desc    Update a property by ID
+// @access  Admin
+router.put("/:id", upload.array("images", 50), updateProperty);
+
+// @route   DELETE /api/properties/:id
+// @desc    Delete a property by ID
+// @access  Admin
+router.delete("/:id", deleteProperty);
+
+// **NEW: Delete single image from property**
+router.delete("/:id/image", deletePropertyImage);
+
+router.put("/:id/add-to-homepage", addToHomePage);
+router.put("/:id/remove-from-homepage", removeFromHomePage);
+
+export default router;

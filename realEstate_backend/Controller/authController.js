@@ -1,5 +1,5 @@
 // controllers/authController.js - WITH ADMIN MANAGEMENT
-import Admin from "../models/adminModel.js";
+import Admin from "../models/AdminModel.js";
 import jwt from "jsonwebtoken";
 
 // Generate JWT Token

@@ -21,7 +21,7 @@ const adminALLOW = process.env.ALLOW_ADMIN;
 // Middleware
 app.use(
   cors({
-    origin: [userAllow, adminALLOW,"http://localhost:5173/"], // ✅ allow frontend
+    origin: [userAllow, adminALLOW, "http://localhost:5173"], // ✅ allow frontend
     credentials: true,
   })
 );

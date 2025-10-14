@@ -33,9 +33,6 @@ const HeroSection = () => {
               <h1 className="font-serif text-3xl  xs:text-4xl sm:text-5xl md:text-7xl lg:text-7xl xl:text-8xl font-normal leading-tight text-white">
                 Find Properties On Sale in UAE.
               </h1>
-              <div className="w-fit mx-auto lg:mx-0 text-base xs:text-lg sm:text-xl">
-                <p className="text-gold font-bold">Discover Luxury</p>
-              </div>
             </div>
 
             {/* Description */}

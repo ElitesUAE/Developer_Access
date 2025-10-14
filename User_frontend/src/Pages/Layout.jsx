@@ -1,7 +1,7 @@
 // src/components/Layout.jsx
 import React from "react";
 import { Outlet } from "react-router-dom";
-import PopupManager from "../components/popups/PopupManager";
+import PopupManager from "../components/Popups/PopupManager.jsx";
 import ScrollToTop from "../components/ScrollToTop";
 
 const Layout = () => {

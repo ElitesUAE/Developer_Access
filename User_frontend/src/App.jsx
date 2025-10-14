@@ -1,15 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import HomePage from "./Pages/HomePage";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import About from "./Pages/About";
-import ContactUs from "./Pages/ContactUs";
-import PropertiesPage from "./Pages/PropertiesPage";
-import PropertyDetailsPage from "./Pages/PropertyDetailsPage";
-import BlogPage from "./Pages/BlogPage";
-import BlogDetailsPage from "./Pages/BlogDetailsPage";
-import Layout from "./Pages/Layout";
+import HomePage from "./Pages/HomePage.jsx";
+import Navbar from "./components/Navbar.jsx";
+import Footer from "./components/Footer.jsx";
+import About from "./Pages/About.jsx";
+import ContactUs from "./Pages/ContactUs.jsx";
+import PropertiesPage from "./Pages/PropertiesPage.jsx";
+import PropertyDetailsPage from "./Pages/PropertyDetailsPage.jsx";
+import BlogPage from "./Pages/BlogPage.jsx";
+import BlogDetailsPage from "./Pages/BlogDetailsPage.jsx";
+import Layout from "./Pages/Layout.jsx";
 function App() {
   return (
     <>

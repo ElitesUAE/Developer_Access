@@ -40,7 +40,6 @@ const AdminSignIn = () => {
 
   return (
     <>
-    
       <div className="min-h-screen bg-gradient-to-br from-[#0A2540] via-[#1A3A5C] to-[#0A2540] flex items-center justify-center p-4">
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-5">

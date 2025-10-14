@@ -87,12 +87,12 @@ const About = () => {
           </div>
 
           {/* Floating accent */}
-          <div className="absolute -bottom-8 md:-left-8 w-32 h-32 bg-[#CFAF4E] rounded-2xl shadow-xl z-20 flex items-center justify-center">
+          {/* <div className="absolute -bottom-8 md:-left-8 w-32 h-32 bg-[#CFAF4E] rounded-2xl shadow-xl z-20 flex items-center justify-center">
             <div className="text-center">
               <div className="text-3xl font-bold text-white">10+</div>
               <div className="text-xs text-white/90">Years Expertise</div>
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
 

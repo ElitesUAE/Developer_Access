@@ -83,66 +83,6 @@ export const getBlogs = async (req, res) => {
   }
 };
 
-//pagination wise api for blog getting
-// export const getBlogsPagination = async (req, res) => {
-//   try {
-//     const { page = 1, limit = 9, category, search } = req.query;
-
-//     // Build query
-//     const query = {};
-
-//     // Category filter
-//     if (category && category !== "All") {
-//       query.category = category;
-//     }
-
-//     // Search filter (search in title and description)
-//     if (search) {
-//       query.$or = [
-//         { title: { $regex: search, $options: "i" } },
-//         { description: { $regex: search, $options: "i" } },
-//       ];
-//     }
-
-//     // Calculate pagination
-//     const skip = (parseInt(page) - 1) * parseInt(limit);
-//     const limitNum = parseInt(limit);
-
-//     // Execute query with pagination
-//     // Only select fields needed for blog listing page (not full description)
-//     const blogs = await Blog.find(query)
-//       .select("_id title imageUrl date category tags createdAt") // Exclude full description for performance
-//       .sort({ createdAt: -1 }) // Latest first
-//       .skip(skip)
-//       .limit(limitNum)
-//       .lean(); // Returns plain JS objects (faster)
-
-//     // Get total count for pagination
-//     const totalBlogs = await Blog.countDocuments(query);
-//     const totalPages = Math.ceil(totalBlogs / limitNum);
-
-//     res.status(200).json({
-//       success: true,
-//       blogs,
-//       pagination: {
-//         currentPage: parseInt(page),
-//         totalPages,
-//         totalBlogs,
-//         limit: limitNum,
-//         hasNextPage: parseInt(page) < totalPages,
-//         hasPrevPage: parseInt(page) > 1,
-//       },
-//     });
-//   } catch (error) {
-//     console.error("Error fetching blogs with pagination:", error);
-//     res.status(500).json({
-//       success: false,
-//       message: "Failed to fetch blogs",
-//       error: error.message,
-//     });
-//   }
-// };
-
 // backend/controllers/blogController.js - UPDATED WITH SORT
 export const getBlogsPagination = async (req, res) => {
   try {
@@ -336,10 +276,10 @@ export const addToHomePage = async (req, res) => {
     const homepageCount = await Blog.countDocuments({ isOnHomePage: true });
 
     // Check if limit reached
-    if (homepageCount >= 3) {
+    if (homepageCount >= 6) {
       return res.status(400).json({
         message:
-          "Homepage limit reached. Maximum 3 blogs allowed on homepage. Please remove one first.",
+          "Homepage limit reached. Maximum 6 blogs allowed on homepage. Please remove one first.",
       });
     }
 
@@ -409,7 +349,7 @@ export const getHomePageBlogs = async (req, res) => {
     const homePageBlogs = await Blog.find({ isOnHomePage: true })
       .select("imageUrl date title category")
       .sort({ createdAt: -1 })
-      .limit(3);
+      .limit(6);
 
     res.status(200).json({
       success: true,

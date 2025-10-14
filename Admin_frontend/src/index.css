@@ -1,0 +1,37 @@
+@import "tailwindcss";
+
+@theme {
+    /* Custom Colors - Navy + Gold Real Estate Theme */
+    --color-navy: #0A2540;
+    --color-gold: #CFAF4E;
+    --color-navy-light: #1A3A5C;
+    --color-navy-dark: #041829;
+    --color-gold-light: #E4C666;
+    --color-gold-dark: #B8973A;
+    --color-light-gray: #F4F4F4;
+    --color-charcol-gray: #333333;
+
+    /* Custom Fonts */
+    --font-luxury: "Playfair Display", serif;
+    --font-modern: "Inter", system-ui, sans-serif;
+    --font-sans: "Inter", system-ui, sans-serif;
+}
+
+/* Optional: Add some base styles */
+body {
+    font-family: var(--font-modern);
+}
+
+.justified {
+    text-align: justify;
+    /* Justify text */
+    text-justify: inter-word;
+    /* Balance spacing between words */
+    word-spacing: normal;
+    /* Prevents extra spacing */
+    letter-spacing: normal;
+    /* Prevents stretched letters */
+    hyphens: auto;
+    /* Allow natural word breaks */
+    overflow-wrap: break-word;
+}

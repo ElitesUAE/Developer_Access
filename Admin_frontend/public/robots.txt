@@ -1,0 +1,47 @@
+# Elite In Emirates Admin Panel - Robots.txt
+# This file tells search engines NOT to index the admin panel
+
+User-agent: *
+Disallow: /
+
+# Block all common search engine bots
+User-agent: Googlebot
+Disallow: /
+
+User-agent: Bingbot
+Disallow: /
+
+User-agent: Slurp
+Disallow: /
+
+User-agent: DuckDuckBot
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: YandexBot
+Disallow: /
+
+User-agent: facebookexternalhit
+Disallow: /
+
+# Block specific admin routes (extra security)
+User-agent: *
+Disallow: /admin/
+Disallow: /login
+Disallow: /signin
+
+# Allow access to static assets only
+Allow: /assets/
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.svg$
+
+# Crawl delay (seconds between requests)
+Crawl-delay: 10
+
+# Sitemap location (if you create one)
+# Sitemap: https://eliteinemirates.com/sitemap.xml

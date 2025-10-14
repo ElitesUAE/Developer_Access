@@ -10,7 +10,7 @@ const HeroSection = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative min-h-screen h-auto sm:h-screen sm:man-h-[600px] md:min-h-[800px]  flex items-center overflow-hidden py-12 sm:py-0">
+    <section className="relative min-h-screen h-auto sm:h-screen sm:man-h-[500px] md:min-h-[500px]  flex items-center overflow-hidden py-12 sm:py-0">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
@@ -36,9 +36,9 @@ const HeroSection = () => {
             </div>
 
             {/* Description */}
-            <p className="font-serif  text-sm xs:text-md  text-center lg:text-left justified sm:text-base md:text-lg text-white leading-relaxed max-w-xl mx-auto lg:mx-0  xs:px-0">
-              We simplify your journey to discovering the finest
-              properties in Dubai.
+            <p className="font-serif text-white text-center lg:text-left max-w-4xl mx-auto lg:mx-0 leading-relaxed px-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+              We simplify your journey to discovering the finest properties in
+              Dubai.
             </p>
 
             {/* CTA Button */}

@@ -75,7 +75,11 @@ const socialLinks = [
     icon: <InstagramIcon />,
     name: "Instagram",
   },
-  { href: "#", icon: <LinkedInIcon />, name: "LinkedIn" },
+  {
+    href: "https://www.linkedin.com/company/elite-in-emirates/",
+    icon: <LinkedInIcon />,
+    name: "LinkedIn",
+  },
   {
     href: "https://www.youtube.com/@EliteInEmirates",
     icon: <YoutubeIcon />,

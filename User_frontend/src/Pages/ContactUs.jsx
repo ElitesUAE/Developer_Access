@@ -102,7 +102,11 @@ const ContactUs = () => {
       icon: <InstagramIcon />,
       name: "Instagram",
     },
-    { href: "#", icon: <LinkedInIcon />, name: "LinkedIn" },
+    {
+      href: "https://www.linkedin.com/company/elite-in-emirates/",
+      icon: <LinkedInIcon />,
+      name: "LinkedIn",
+    },
     {
       href: "https://www.youtube.com/@EliteInEmirates",
       icon: <YoutubeIcon />,
@@ -282,12 +286,7 @@ const ContactUs = () => {
                   icon: <Mail className="text-white" size={24} />,
                   title: "Email",
                   value: "hello@eliteinemirates.com",
-                },
-                {
-                  icon: <MapPin className="text-white" size={24} />,
-                  title: "Location",
-                  value: "Dubai, United Arab Emirates",
-                },
+                }
               ].map((item, i) => (
                 <div
                   key={i}

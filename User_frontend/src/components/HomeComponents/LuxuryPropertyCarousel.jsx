@@ -12,7 +12,7 @@ const CurvedPanoramicCarousel = ({ properties = [], loading = false }) => {
   // Configuration
   const config = {
     totalSlides: Math.max(8, properties.length), // At least 8 or property count
-    radius: 850,
+    radius: 1000,
     slideHeight: 550,
     slideSpacing: 1,
     rotationSpeed: 0.1,
@@ -68,7 +68,7 @@ const CurvedPanoramicCarousel = ({ properties = [], loading = false }) => {
   }
 
   return (
-    <div className="w-full min-h-screen flex flex-col items-center justify-center py-4 overflow-hidden">
+    <div className="w-full flex flex-col items-center justify-center overflow-hidden">
       {/* Title Section */}
       <div className="text-center px-4">
         <h1 className="font-luxury text-navy text-5xl sm:text-6xl lg:text-7xl font-bold mb-2">
@@ -85,7 +85,7 @@ const CurvedPanoramicCarousel = ({ properties = [], loading = false }) => {
         onMouseEnter={() => config.pauseOnHover && setIsPaused(true)}
         onMouseLeave={() => config.pauseOnHover && setIsPaused(false)}
         style={{
-          perspective: "850px",
+          perspective: "1000px",
           perspectiveOrigin: "center center",
         }}
       >

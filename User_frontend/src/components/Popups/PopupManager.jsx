@@ -34,7 +34,7 @@ const PopupManager = () => {
     if (queue.length > 0) {
       const timer = setTimeout(() => {
         setActivePopup(queue[0]);
-      }, 3000); // 3 second delay after page load
+      }, 40000); // 3 second delay after page load
 
       return () => clearTimeout(timer);
     }
@@ -59,7 +59,7 @@ const PopupManager = () => {
     if (remainingQueue.length > 0) {
       setTimeout(() => {
         setActivePopup(remainingQueue[0]);
-      }, 5000); // 5 second delay between popups
+      }, 50000); // 5 second delay between popups
     }
   };
 

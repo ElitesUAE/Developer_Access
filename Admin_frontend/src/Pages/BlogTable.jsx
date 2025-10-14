@@ -78,9 +78,9 @@ export default function BlogTable() {
       if (blog.isOnHomePage) {
         await removeFromHomePage(blog._id);
       } else {
-        if (homepageCount >= 3) {
+        if (homepageCount >= 6) {
           alert(
-            "Maximum 3 blogs allowed on homepage. Please remove one first."
+            "Maximum 6 blogs allowed on homepage. Please remove one first."
           );
           setHomepageLoading(false);
           return;
@@ -104,7 +104,6 @@ export default function BlogTable() {
   }
 
   return (
-    
     <div className="min-h-screen bg-gradient-to-b from-[#F4F4F4] to-white py-4 sm:py-8 px-3 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header - Mobile Optimized */}
@@ -117,7 +116,7 @@ export default function BlogTable() {
               <p className="text-xs sm:text-sm text-[#333333]/70 mt-1 font-['Inter'] flex items-center gap-2 flex-wrap">
                 Manage all your blog content
                 <span className="px-2 py-0.5 text-[10px] sm:text-xs bg-[#CFAF4E]/20 text-[#0A2540] rounded-full font-medium">
-                  {homepageCount}/3 on homepage
+                  {homepageCount}/6 on homepage
                 </span>
               </p>
             </div>
@@ -181,7 +180,7 @@ export default function BlogTable() {
                   </tr>
                 ) : (
                   blogs.map((blog, idx) => {
-                    const canCheck = homepageCount < 3 || blog.isOnHomePage;
+                    const canCheck = homepageCount < 6 || blog.isOnHomePage;
 
                     return (
                       <tr
@@ -313,7 +312,7 @@ export default function BlogTable() {
             </div>
           ) : (
             blogs.map((blog) => {
-              const canCheck = homepageCount < 3 || blog.isOnHomePage;
+              const canCheck = homepageCount < 6 || blog.isOnHomePage;
 
               return (
                 <div

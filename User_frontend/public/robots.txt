@@ -1,0 +1,19 @@
+# Elite In Emirates - User Website Robots.txt
+User-agent: *
+Allow: /
+Allow: /properties/
+Allow: /blog/
+Allow: /about
+Allow: /contact
+
+# Allow media
+Allow: /images/
+Allow: /assets/
+Allow: /*.css$
+Allow: /*.js$
+
+# Crawl delay
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://eliteinemirates.com/sitemap.xml

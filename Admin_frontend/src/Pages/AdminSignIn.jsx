@@ -134,25 +134,6 @@ const AdminSignIn = () => {
                 </div>
               </div>
 
-              {/* Remember Me & Forgot Password */}
-              <div className="flex items-center justify-between">
-                <label className="flex items-center gap-2 cursor-pointer group">
-                  <input
-                    type="checkbox"
-                    className="w-4 h-4 rounded border-white/20 bg-white/10 text-[#CFAF4E] focus:ring-[#CFAF4E] focus:ring-offset-0"
-                  />
-                  <span className="text-white/70 text-sm font-['Inter'] group-hover:text-white transition-colors">
-                    Remember me
-                  </span>
-                </label>
-                <button
-                  type="button"
-                  className="text-[#CFAF4E] text-sm font-['Inter'] hover:underline"
-                >
-                  Forgot password?
-                </button>
-              </div>
-
               {/* Submit Button */}
               <button
                 type="submit"

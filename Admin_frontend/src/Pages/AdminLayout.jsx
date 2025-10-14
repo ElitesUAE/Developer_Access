@@ -1,7 +1,7 @@
 // src/components/admin/AdminLayout.jsx
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import AdminSidebar from "../components/AdminSidebar";
+import AdminSidebar from "../components/AdminSidebar.jsx";
 import { Menu, X } from "lucide-react";
 
 const AdminLayout = () => {

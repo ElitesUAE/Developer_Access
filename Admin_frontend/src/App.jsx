@@ -12,7 +12,7 @@ import CallbackRequestsPage from "./Pages/CallbackRequestsPage";
 import ScrollToTop from "./components/ScrollToTop.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import AdminManagementPage from "./Pages/AdminManagementPage.jsx";
-import AdminLayout from "./pages/AdminLayout.jsx";
+import AdminLayout from "./Pages/AdminLayout.jsx";
 import AdminSignIn from "./Pages/AdminSignIn.jsx";
 
 function App() {

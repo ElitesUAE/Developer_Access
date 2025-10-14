@@ -15,7 +15,7 @@ import {
   Filter,
   User,
 } from "lucide-react";
-import Button from "../components/Button";
+import Button from "../components/Button.jsx";
 import toast from "react-hot-toast";
 
 const AdminLeadsPage = () => {

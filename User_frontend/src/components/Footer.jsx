@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useNewsletterStore } from "../store/useNewsletterStore";
 import toast from "react-hot-toast";
-import { Loader2 } from "lucide-react";
+import { Loader2, CheckCircle2, AlertCircle, Info } from "lucide-react";
 
 // Using placeholder Link for demonstration
 const Link = ({ to, children, ...props }) => (
@@ -90,6 +90,7 @@ const socialLinks = [
 function Footer() {
   // ✅ Newsletter state management
   const [email, setEmail] = useState("");
+  const [feedbackMessage, setFeedbackMessage] = useState(null); // { type: 'success' | 'error' | 'info', message: string }
   const { subscribe, loading, error, successMessage, clearMessages } =
     useNewsletterStore();
 
@@ -99,46 +100,57 @@ function Footer() {
 
     // Clear previous messages
     clearMessages();
+    setFeedbackMessage(null);
 
     // Validate email
     if (!email || !email.trim()) {
-      toast.error("Please enter your email address");
+      setFeedbackMessage({
+        type: "error",
+        message: "Please enter your email address",
+      });
       return;
     }
 
     // Basic email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      toast.error("Please enter a valid email address");
+      setFeedbackMessage({
+        type: "error",
+        message: "Please enter a valid email address",
+      });
       return;
     }
 
     try {
       const result = await subscribe(email, "footer");
 
-      // Show success message
+      // Show success message below form
       if (result.alreadySubscribed) {
-        toast("You're already subscribed! 📧", {
-          icon: "ℹ️",
-          style: {
-            background: "#0A2540",
-            color: "#CFAF4E",
-          },
+        setFeedbackMessage({
+          type: "info",
+          message: "You're already subscribed! 📧",
         });
       } else {
-        toast.success(result.message || "Successfully subscribed! 🎉", {
-          duration: 4000,
-          style: {
-            background: "#0A2540",
-            color: "#CFAF4E",
-          },
+        setFeedbackMessage({
+          type: "success",
+          message:
+            result.message ||
+            "Successfully subscribed! 🎉 Check your inbox for updates.",
         });
       }
 
       // Clear email input
       setEmail("");
+
+      // Auto-hide message after 5 seconds
+      setTimeout(() => {
+        setFeedbackMessage(null);
+      }, 5000);
     } catch (err) {
-      toast.error(error || "Failed to subscribe. Please try again.");
+      setFeedbackMessage({
+        type: "error",
+        message: error || "Failed to subscribe. Please try again.",
+      });
     }
   };
 
@@ -252,7 +264,7 @@ function Footer() {
             </ul>
           </motion.div>
 
-          {/* Column 3: Newsletter - ✅ INTEGRATED */}
+          {/* Column 3: Newsletter - ✅ INTEGRATED WITH INLINE FEEDBACK */}
           <motion.div
             variants={itemVariants}
             className="w-full flex flex-col items-center text-center md:items-start md:text-left lg:col-span-2"
@@ -297,11 +309,43 @@ function Footer() {
               </button>
             </form>
 
-            {/* ✅ Privacy Notice */}
-            <p className="text-xs text-gray-400 mt-3 max-w-md">
-              By subscribing, you agree to receive marketing emails. You can
-              unsubscribe at any time.
-            </p>
+            {/* ✅ INLINE FEEDBACK MESSAGE - Displayed Below Form */}
+            {feedbackMessage && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+                className={`mt-3 w-full max-w-md px-4 py-3 rounded-lg flex items-start gap-3 ${
+                  feedbackMessage.type === "success"
+                    ? "bg-green-500/20 border border-green-500/50"
+                    : feedbackMessage.type === "error"
+                    ? "bg-red-500/20 border border-red-500/50"
+                    : "bg-blue-500/20 border border-blue-500/50"
+                }`}
+              >
+                {feedbackMessage.type === "success" && (
+                  <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
+                )}
+                {feedbackMessage.type === "error" && (
+                  <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+                )}
+                {feedbackMessage.type === "info" && (
+                  <Info className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" />
+                )}
+                <p
+                  className={`text-sm sm:text-base ${
+                    feedbackMessage.type === "success"
+                      ? "text-green-100"
+                      : feedbackMessage.type === "error"
+                      ? "text-red-100"
+                      : "text-blue-100"
+                  }`}
+                >
+                  {feedbackMessage.message}
+                </p>
+              </motion.div>
+            )}
           </motion.div>
         </motion.div>
 

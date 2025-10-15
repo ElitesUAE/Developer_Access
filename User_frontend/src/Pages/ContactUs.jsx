@@ -8,11 +8,16 @@ import {
   Linkedin,
   Send,
   Loader2,
+  CheckCircle2,
+  AlertCircle,
+  Info,
 } from "lucide-react";
 import { useContactStore } from "../store/useContactStore";
+import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import StructuredData from "../components/StructuredData";
 import useSEO from "../hooks/useSEO";
+
 const ContactUs = () => {
   const { createContact, loading } = useContactStore();
   const [formData, setFormData] = useState({
@@ -21,9 +26,13 @@ const ContactUs = () => {
     phone: "",
     message: "",
   });
+  const [feedbackMessage, setFeedbackMessage] = useState(null); // { type: 'success' | 'error' | 'info', message: string }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Clear previous feedback
+    setFeedbackMessage(null);
 
     // Validation
     if (
@@ -32,13 +41,23 @@ const ContactUs = () => {
       !formData.phone ||
       !formData.message
     ) {
-      toast.error("Please fill in all fields");
+      setFeedbackMessage({
+        type: "error",
+        message: "Please fill in all fields",
+      });
       return;
     }
 
     try {
       const result = await createContact(formData);
-      toast.success(result.message || "Message sent successfully! 🎉");
+
+      // Show inline success message
+      setFeedbackMessage({
+        type: "success",
+        message:
+          result.message ||
+          "Message sent successfully! 🎉 We'll get back to you soon.",
+      });
 
       // Reset form
       setFormData({
@@ -47,12 +66,19 @@ const ContactUs = () => {
         phone: "",
         message: "",
       });
+
+      // Auto-hide message after 6 seconds
+      setTimeout(() => {
+        setFeedbackMessage(null);
+      }, 6000);
     } catch (error) {
       console.error("Error submitting form:", error);
-      toast.error(
-        error.response?.data?.message ||
-          "Failed to send message. Please try again."
-      );
+      setFeedbackMessage({
+        type: "error",
+        message:
+          error.response?.data?.message ||
+          "Failed to send message. Please try again.",
+      });
     }
   };
 
@@ -113,12 +139,14 @@ const ContactUs = () => {
       name: "YouTube",
     },
   ];
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
+
   useSEO({
     title: "Contact Us | Elite In Emirates - Luxury Real Estate Dubai",
     description:
@@ -260,6 +288,44 @@ const ContactUs = () => {
                     )}
                   </span>
                 </button>
+
+                {/* ✅ INLINE FEEDBACK MESSAGE - Displayed Below Submit Button */}
+                {feedbackMessage && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className={`w-full px-4 py-3 rounded-lg flex items-start gap-3 ${
+                      feedbackMessage.type === "success"
+                        ? "bg-green-500/20 border border-green-500/50"
+                        : feedbackMessage.type === "error"
+                        ? "bg-red-500/20 border border-red-500/50"
+                        : "bg-blue-500/20 border border-blue-500/50"
+                    }`}
+                  >
+                    {feedbackMessage.type === "success" && (
+                      <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                    )}
+                    {feedbackMessage.type === "error" && (
+                      <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                    )}
+                    {feedbackMessage.type === "info" && (
+                      <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+                    )}
+                    <p
+                      className={`text-sm sm:text-base font-medium ${
+                        feedbackMessage.type === "success"
+                          ? "text-green-700"
+                          : feedbackMessage.type === "error"
+                          ? "text-red-700"
+                          : "text-blue-700"
+                      }`}
+                    >
+                      {feedbackMessage.message}
+                    </p>
+                  </motion.div>
+                )}
               </form>
             </div>
           </div>
@@ -286,7 +352,8 @@ const ContactUs = () => {
                   icon: <Mail className="text-white" size={24} />,
                   title: "Email",
                   value: "hello@eliteinemirates.com",
-                }
+                  isEmail: true,
+                },
               ].map((item, i) => (
                 <div
                   key={i}
@@ -299,9 +366,18 @@ const ContactUs = () => {
                     <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-1">
                       {item.title}
                     </div>
-                    <span className="text-[#333333] font-medium break-all">
-                      {item.value}
-                    </span>
+                    {item.isEmail ? (
+                      <a
+                        href={`mailto:${item.value}`}
+                        className="text-[#333333] font-medium break-all hover:text-[#CFAF4E] transition-colors duration-200 underline decoration-[#CFAF4E]/30 hover:decoration-[#CFAF4E]"
+                      >
+                        {item.value}
+                      </a>
+                    ) : (
+                      <span className="text-[#333333] font-medium break-all">
+                        {item.value}
+                      </span>
+                    )}
                   </div>
                 </div>
               ))}

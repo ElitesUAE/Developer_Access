@@ -8,8 +8,12 @@ import {
   MessageSquare,
   Clock,
   Loader2,
+  CheckCircle2,
+  AlertCircle,
+  Info,
 } from "lucide-react";
 import { useCallbackStore } from "../../store/useCallbackStore";
+import { motion, AnimatePresence } from "framer-motion";
 import Button from "../Button";
 import toast from "react-hot-toast";
 
@@ -31,6 +35,7 @@ const CallbackModal = ({ isOpen, onClose, property }) => {
   });
 
   const [errors, setErrors] = useState({});
+  const [feedbackMessage, setFeedbackMessage] = useState(null); // { type: 'success' | 'error', message: string }
 
   // Clear form when modal opens
   useEffect(() => {
@@ -43,6 +48,7 @@ const CallbackModal = ({ isOpen, onClose, property }) => {
         preferredTime: "Anytime",
       });
       setErrors({});
+      setFeedbackMessage(null);
       clearMessages();
     }
   }, [isOpen]);
@@ -82,7 +88,14 @@ const CallbackModal = ({ isOpen, onClose, property }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Clear previous feedback
+    setFeedbackMessage(null);
+
     if (!validateForm()) {
+      setFeedbackMessage({
+        type: "error",
+        message: "Please fix the errors above before submitting.",
+      });
       return;
     }
 
@@ -95,23 +108,23 @@ const CallbackModal = ({ isOpen, onClose, property }) => {
 
       await submitCallbackRequest(requestData);
 
-      toast.success(
-        "Callback request submitted successfully! We'll contact you soon.",
-        {
-          duration: 5000,
-          style: {
-            background: "#0A2540",
-            color: "#CFAF4E",
-          },
-        }
-      );
+      // Show inline success message
+      setFeedbackMessage({
+        type: "success",
+        message:
+          "Callback request submitted successfully! 🎉 We'll contact you soon.",
+      });
 
-      // Close modal after success
+      // Close modal after 2.5 seconds to allow user to see success message
       setTimeout(() => {
         onClose();
-      }, 1500);
+        setFeedbackMessage(null);
+      }, 2500);
     } catch (err) {
-      toast.error(error || "Failed to submit request. Please try again.");
+      setFeedbackMessage({
+        type: "error",
+        message: error || "Failed to submit request. Please try again.",
+      });
     }
   };
 
@@ -137,6 +150,7 @@ const CallbackModal = ({ isOpen, onClose, property }) => {
           <button
             onClick={onClose}
             className="p-2 hover:bg-white/10 rounded-full transition-colors duration-200"
+            disabled={loading}
           >
             <X size={24} />
           </button>
@@ -170,9 +184,10 @@ const CallbackModal = ({ isOpen, onClose, property }) => {
                   setFormData({ ...formData, name: e.target.value })
                 }
                 placeholder="Enter your full name"
+                disabled={loading}
                 className={`w-full px-4 py-3 border ${
                   errors.name ? "border-red-500" : "border-[#CFAF4E]/30"
-                } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#CFAF4E] font-['Inter'] transition-all duration-200`}
+                } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#CFAF4E] font-['Inter'] transition-all duration-200 disabled:bg-gray-100 disabled:cursor-not-allowed`}
               />
               {errors.name && (
                 <p className="text-red-500 text-sm mt-1 font-['Inter']">
@@ -194,9 +209,10 @@ const CallbackModal = ({ isOpen, onClose, property }) => {
                   setFormData({ ...formData, email: e.target.value })
                 }
                 placeholder="your.email@example.com"
+                disabled={loading}
                 className={`w-full px-4 py-3 border ${
                   errors.email ? "border-red-500" : "border-[#CFAF4E]/30"
-                } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#CFAF4E] font-['Inter'] transition-all duration-200`}
+                } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#CFAF4E] font-['Inter'] transition-all duration-200 disabled:bg-gray-100 disabled:cursor-not-allowed`}
               />
               {errors.email && (
                 <p className="text-red-500 text-sm mt-1 font-['Inter']">
@@ -218,9 +234,10 @@ const CallbackModal = ({ isOpen, onClose, property }) => {
                   setFormData({ ...formData, phone: e.target.value })
                 }
                 placeholder="+xx xx xxx xxxx"
+                disabled={loading}
                 className={`w-full px-4 py-3 border ${
                   errors.phone ? "border-red-500" : "border-[#CFAF4E]/30"
-                } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#CFAF4E] font-['Inter'] transition-all duration-200`}
+                } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#CFAF4E] font-['Inter'] transition-all duration-200 disabled:bg-gray-100 disabled:cursor-not-allowed`}
               />
               {errors?.phone && (
                 <p className="text-red-500 text-sm mt-1 font-['Inter']">
@@ -240,7 +257,8 @@ const CallbackModal = ({ isOpen, onClose, property }) => {
                 onChange={(e) =>
                   setFormData({ ...formData, preferredTime: e.target.value })
                 }
-                className="w-full px-4 py-3 border border-[#CFAF4E]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#CFAF4E] font-['Inter'] transition-all duration-200"
+                disabled={loading}
+                className="w-full px-4 py-3 border border-[#CFAF4E]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#CFAF4E] font-['Inter'] transition-all duration-200 disabled:bg-gray-100 disabled:cursor-not-allowed"
               >
                 <option value="Anytime">Anytime</option>
                 <option value="Morning">Morning (9 AM - 12 PM)</option>
@@ -263,7 +281,8 @@ const CallbackModal = ({ isOpen, onClose, property }) => {
                 placeholder="Tell us more about your requirements..."
                 rows={4}
                 maxLength={500}
-                className="w-full px-4 py-3 border border-[#CFAF4E]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#CFAF4E] font-['Inter'] resize-none transition-all duration-200"
+                disabled={loading}
+                className="w-full px-4 py-3 border border-[#CFAF4E]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#CFAF4E] font-['Inter'] resize-none transition-all duration-200 disabled:bg-gray-100 disabled:cursor-not-allowed"
               />
               <p className="text-xs text-[#333333]/60 mt-1 text-right font-['Inter']">
                 {formData.message.length}/500 characters
@@ -295,11 +314,41 @@ const CallbackModal = ({ isOpen, onClose, property }) => {
             </Button>
           </div>
 
-          {/* Privacy Notice */}
-          <p className="text-xs text-[#333333]/60 text-center mt-4 font-['Inter']">
-            By submitting this form, you agree to our terms and privacy policy.
-            Your information will be kept confidential.
-          </p>
+          {/* ✅ INLINE FEEDBACK MESSAGE - Displayed Below Submit Buttons */}
+          <AnimatePresence>
+            {feedbackMessage && (
+              <motion.div
+                initial={{ opacity: 0, y: -10, height: 0 }}
+                animate={{ opacity: 1, y: 0, height: "auto" }}
+                exit={{ opacity: 0, y: -10, height: 0 }}
+                transition={{ duration: 0.3 }}
+                className="overflow-hidden"
+              >
+                <div
+                  className={`mt-4 w-full px-4 py-3 rounded-lg flex items-start gap-3 ${
+                    feedbackMessage.type === "success"
+                      ? "bg-green-500/20 border border-green-500/50"
+                      : "bg-red-500/20 border border-red-500/50"
+                  }`}
+                >
+                  {feedbackMessage.type === "success" ? (
+                    <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                  ) : (
+                    <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                  )}
+                  <p
+                    className={`text-sm sm:text-base font-medium font-['Inter'] ${
+                      feedbackMessage.type === "success"
+                        ? "text-green-700"
+                        : "text-red-700"
+                    }`}
+                  >
+                    {feedbackMessage.message}
+                  </p>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </form>
       </div>
     </div>

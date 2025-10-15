@@ -8,8 +8,11 @@ import {
   Mail,
   Phone,
   MessageSquare,
+  CheckCircle2,
+  AlertCircle,
 } from "lucide-react";
 import { useContactStore } from "../store/useContactStore";
+import { motion, AnimatePresence } from "framer-motion";
 import toast from "react-hot-toast";
 
 const ContactFormModal = ({ isOpen, onClose, title, description }) => {
@@ -20,11 +23,14 @@ const ContactFormModal = ({ isOpen, onClose, title, description }) => {
     phone: "",
     message: "",
   });
+  const [feedbackMessage, setFeedbackMessage] = useState(null); // { type: 'success' | 'error', message: string }
 
   // Prevent body scroll when modal is open
   React.useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
+      // Clear feedback when modal opens
+      setFeedbackMessage(null);
     } else {
       document.body.style.overflow = "unset";
     }
@@ -37,6 +43,9 @@ const ContactFormModal = ({ isOpen, onClose, title, description }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Clear previous feedback
+    setFeedbackMessage(null);
+
     // Validation
     if (
       !formData.fullName ||
@@ -44,13 +53,33 @@ const ContactFormModal = ({ isOpen, onClose, title, description }) => {
       !formData.phone ||
       !formData.message
     ) {
-      toast.error("Please fill in all fields");
+      setFeedbackMessage({
+        type: "error",
+        message: "Please fill in all fields",
+      });
+      return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setFeedbackMessage({
+        type: "error",
+        message: "Please enter a valid email address",
+      });
       return;
     }
 
     try {
       const result = await createContact(formData);
-      toast.success(result.message || "Message sent successfully! 🎉");
+
+      // Show inline success message
+      setFeedbackMessage({
+        type: "success",
+        message:
+          result.message ||
+          "Message sent successfully! 🎉 We'll get back to you soon.",
+      });
 
       // Reset form
       setFormData({
@@ -60,16 +89,19 @@ const ContactFormModal = ({ isOpen, onClose, title, description }) => {
         message: "",
       });
 
-      // Close modal after successful submission
+      // Close modal after 2.5 seconds to show success message
       setTimeout(() => {
         onClose();
-      }, 1000);
+        setFeedbackMessage(null);
+      }, 2500);
     } catch (error) {
       console.error("Error submitting form:", error);
-      toast.error(
-        error.response?.data?.message ||
-          "Failed to send message. Please try again."
-      );
+      setFeedbackMessage({
+        type: "error",
+        message:
+          error.response?.data?.message ||
+          "Failed to send message. Please try again.",
+      });
     }
   };
 
@@ -88,6 +120,7 @@ const ContactFormModal = ({ isOpen, onClose, title, description }) => {
         phone: "",
         message: "",
       });
+      setFeedbackMessage(null);
       onClose();
     }
   };
@@ -237,13 +270,43 @@ const ContactFormModal = ({ isOpen, onClose, title, description }) => {
                 )}
               </button>
             </div>
-          </form>
 
-          {/* Footer Note */}
-          <p className="text-xs text-gray-500 text-center mt-6">
-            Your information is secure and will never be shared with third
-            parties.
-          </p>
+            {/* ✅ INLINE FEEDBACK MESSAGE - Displayed Below Submit Buttons */}
+            <AnimatePresence>
+              {feedbackMessage && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10, height: 0 }}
+                  animate={{ opacity: 1, y: 0, height: "auto" }}
+                  exit={{ opacity: 0, y: -10, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                >
+                  <div
+                    className={`w-full px-4 py-3 rounded-lg flex items-start gap-3 ${
+                      feedbackMessage.type === "success"
+                        ? "bg-green-500/20 border border-green-500/50"
+                        : "bg-red-500/20 border border-red-500/50"
+                    }`}
+                  >
+                    {feedbackMessage.type === "success" ? (
+                      <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                    ) : (
+                      <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                    )}
+                    <p
+                      className={`text-sm sm:text-base font-medium ${
+                        feedbackMessage.type === "success"
+                          ? "text-green-700"
+                          : "text-red-700"
+                      }`}
+                    >
+                      {feedbackMessage.message}
+                    </p>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </form>
         </div>
       </div>
     </>

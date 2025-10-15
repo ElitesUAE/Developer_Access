@@ -27,16 +27,16 @@ const HeroSection = () => {
       <div className="relative z-20 w-full max-w-[1400px] mx-auto px-3 xs:px-4 sm:px-6 md:px-8 lg:px-12">
         <div className="flex flex-col lg:flex-row justify-between items-start gap-6 sm:gap-8 lg:gap-12">
           {/* Left Content */}
-          <div className="flex-1 space-y-4 lg:w-[60%] sm:space-y-6 text-center lg:text-left w-full">
+          <div className="flex-1 space-y-4 lg:w-[90%] sm:space-y-6 text-center lg:text-left w-full">
             {/* Main Heading */}
             <div className="space-y-2">
-              <h1 className="font-serif text-3xl  xs:text-4xl sm:text-5xl md:text-7xl lg:text-7xl xl:text-8xl font-normal leading-tight text-white">
+              <h1 className="font-serif text-3xl  xs:text-4xl sm:text-5xl md:text-7xl font-normal leading-tight text-white">
                 Find Properties On Sale in UAE.
               </h1>
             </div>
 
             {/* Description */}
-            <p className="font-serif text-white text-center lg:text-left max-w-4xl mx-auto lg:mx-0 leading-relaxed px-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+            <p className="font-serif text-white text-center lg:text-left max-w-7xl mx-auto lg:mx-0 leading-relaxed px-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
               We simplify your journey to discovering the finest properties in
               Dubai.
             </p>

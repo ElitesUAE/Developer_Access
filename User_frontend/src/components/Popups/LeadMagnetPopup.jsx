@@ -15,7 +15,6 @@ const LeadMagnetPopup = ({ type = "blunders", onClose, isOpen }) => {
   // Get store functions and log them
   const store = useLeadStore();
 
-
   const { submitBlundersLead, submitStrategiesLead, submitting, clearError } =
     store;
 
@@ -70,10 +69,7 @@ const LeadMagnetPopup = ({ type = "blunders", onClose, isOpen }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
-
-
-    try { 
+    try {
       // Show success message
       setIsSubmitted(true);
       // Auto-close after 5 seconds
@@ -179,11 +175,6 @@ const LeadMagnetPopup = ({ type = "blunders", onClose, isOpen }) => {
               >
                 {content.buttonText}
               </Button>
-
-              {/* Privacy Note */}
-              <p className="text-xs text-[#333333]/60 text-center font-['Inter'] mt-4">
-                We respect your privacy. Unsubscribe at any time.
-              </p>
             </form>
           </div>
         ) : (

@@ -550,7 +550,7 @@ export default function EditPropertyPage() {
                   name="title"
                   value={formData?.title}
                   onChange={handleChange}
-                  required
+                  // required
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                 />
               </div>
@@ -564,7 +564,7 @@ export default function EditPropertyPage() {
                   name="propertyType"
                   value={formData?.propertyType}
                   onChange={handleChange}
-                  required
+                  // required
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                 />
               </div>
@@ -598,7 +598,7 @@ export default function EditPropertyPage() {
                   name="city"
                   value={formData?.city}
                   onChange={handleChange}
-                  required
+                  // required
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                 />
               </div>
@@ -612,7 +612,7 @@ export default function EditPropertyPage() {
                   name="location"
                   value={formData?.location}
                   onChange={handleChange}
-                  required
+                  // required
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                 />
               </div>
@@ -626,7 +626,7 @@ export default function EditPropertyPage() {
                   name="developer"
                   value={formData?.developer}
                   onChange={handleChange}
-                  required
+                  // required
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                 />
               </div>
@@ -682,7 +682,7 @@ export default function EditPropertyPage() {
                   name="startingPrice"
                   value={formData?.startingPrice}
                   onChange={handleChange}
-                  required
+                  // required
                   min="0"
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                 />
@@ -697,7 +697,7 @@ export default function EditPropertyPage() {
                   name="bhkCount"
                   value={formData?.bhkCount}
                   onChange={handleChange}
-                  required
+                  // required
                   min="0"
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                 />
@@ -712,7 +712,7 @@ export default function EditPropertyPage() {
                   name="bathCount"
                   value={formData?.bathCount}
                   onChange={handleChange}
-                  required
+                  // required
                   min="0"
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                 />
@@ -727,7 +727,7 @@ export default function EditPropertyPage() {
                   name="totalArea"
                   value={formData?.totalArea}
                   onChange={handleChange}
-                  required
+                  // required
                   min="0"
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                 />
@@ -742,7 +742,7 @@ export default function EditPropertyPage() {
                   name="floors"
                   value={formData?.floors}
                   onChange={handleChange}
-                  required
+                  // required
                   min="0"
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                 />
@@ -757,7 +757,7 @@ export default function EditPropertyPage() {
                   name="totalUnits"
                   value={formData?.totalUnits}
                   onChange={handleChange}
-                  required
+                  // required
                   min="0"
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                 />
@@ -772,7 +772,7 @@ export default function EditPropertyPage() {
                   name="elevation"
                   value={formData?.elevation}
                   onChange={handleChange}
-                  required
+                  // required
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                 />
               </div>
@@ -786,7 +786,7 @@ export default function EditPropertyPage() {
                   name="handover"
                   value={formData?.handover}
                   onChange={handleChange}
-                  required
+                  // required
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                 />
               </div>
@@ -800,7 +800,7 @@ export default function EditPropertyPage() {
                   name="paymentPlan"
                   value={formData?.paymentPlan}
                   onChange={handleChange}
-                  required
+                  // required
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                 />
               </div>
@@ -814,7 +814,7 @@ export default function EditPropertyPage() {
                   name="views"
                   value={formData?.views}
                   onChange={handleChange}
-                  required
+                  // required
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                 />
               </div>
@@ -827,7 +827,7 @@ export default function EditPropertyPage() {
                   name="usp"
                   value={formData?.usp}
                   onChange={handleChange}
-                  required
+                  // required
                   rows={2}
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent resize-none text-sm sm:text-base font-['Inter']"
                 />
@@ -841,7 +841,7 @@ export default function EditPropertyPage() {
                   name="description"
                   value={formData?.description}
                   onChange={handleChange}
-                  required
+                  // required
                   rows={4}
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent resize-none text-sm sm:text-base font-['Inter']"
                 />

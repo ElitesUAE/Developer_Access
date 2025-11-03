@@ -319,7 +319,7 @@ export default function CreatePropertyPage() {
                   name="title"
                   value={formData.title}
                   onChange={handleChange}
-                  required
+                  // required
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                   placeholder="e.g., Luxury Waterfront Apartments"
                 />
@@ -334,7 +334,7 @@ export default function CreatePropertyPage() {
                   name="propertyType"
                   value={formData.propertyType}
                   onChange={handleChange}
-                  required
+                  // required
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                   placeholder="e.g., Apartment, Villa"
                 />
@@ -369,7 +369,7 @@ export default function CreatePropertyPage() {
                   name="city"
                   value={formData.city}
                   onChange={handleChange}
-                  required
+                  // required
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                   placeholder="e.g., Dubai"
                 />
@@ -384,7 +384,7 @@ export default function CreatePropertyPage() {
                   name="location"
                   value={formData.location}
                   onChange={handleChange}
-                  required
+                  // required
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                   placeholder="e.g., Downtown, Marina"
                 />
@@ -399,7 +399,7 @@ export default function CreatePropertyPage() {
                   name="developer"
                   value={formData.developer}
                   onChange={handleChange}
-                  required
+                  // required
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                   placeholder="Developer name"
                 />
@@ -456,7 +456,7 @@ export default function CreatePropertyPage() {
                   name="startingPrice"
                   value={formData.startingPrice}
                   onChange={handleChange}
-                  required
+                  // required
                   min="0"
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                   placeholder="e.g., 750000"
@@ -472,7 +472,7 @@ export default function CreatePropertyPage() {
                   name="bhkCount"
                   value={formData.bhkCount}
                   onChange={handleChange}
-                  required
+                  // required
                   min="0"
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                   placeholder="e.g., 2"
@@ -488,7 +488,7 @@ export default function CreatePropertyPage() {
                   name="bathCount"
                   value={formData.bathCount}
                   onChange={handleChange}
-                  required
+                  // required
                   min="0"
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                   placeholder="e.g., 2"
@@ -504,7 +504,7 @@ export default function CreatePropertyPage() {
                   name="totalArea"
                   value={formData.totalArea}
                   onChange={handleChange}
-                  required
+                  // required
                   min="0"
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                   placeholder="e.g., 1250"
@@ -520,7 +520,7 @@ export default function CreatePropertyPage() {
                   name="floors"
                   value={formData.floors}
                   onChange={handleChange}
-                  required
+                  // required
                   min="0"
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                   placeholder="e.g., 17"
@@ -536,7 +536,7 @@ export default function CreatePropertyPage() {
                   name="totalUnits"
                   value={formData.totalUnits}
                   onChange={handleChange}
-                  required
+                  // required
                   min="0"
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                   placeholder="e.g., 291"
@@ -552,7 +552,7 @@ export default function CreatePropertyPage() {
                   name="elevation"
                   value={formData.elevation}
                   onChange={handleChange}
-                  required
+                  // required
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                   placeholder="e.g., G+2P+17+R"
                 />
@@ -567,7 +567,7 @@ export default function CreatePropertyPage() {
                   name="handover"
                   value={formData.handover}
                   onChange={handleChange}
-                  required
+                  // required
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                   placeholder="e.g., Q2 2028"
                 />
@@ -582,7 +582,7 @@ export default function CreatePropertyPage() {
                   name="paymentPlan"
                   value={formData.paymentPlan}
                   onChange={handleChange}
-                  required
+                  // required
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                   placeholder="e.g., 40% During Construction, 60% On Completion"
                 />
@@ -597,7 +597,7 @@ export default function CreatePropertyPage() {
                   name="views"
                   value={formData.views}
                   onChange={handleChange}
-                  required
+                  // required
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent text-sm sm:text-base font-['Inter']"
                   placeholder="e.g., Al Barari, Majan Park, Global Village"
                 />
@@ -611,7 +611,7 @@ export default function CreatePropertyPage() {
                   name="usp"
                   value={formData.usp}
                   onChange={handleChange}
-                  required
+                  // required
                   rows={2}
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent resize-none text-sm sm:text-base font-['Inter']"
                   placeholder="e.g., 270° green views, corner plot, extensive facilities"
@@ -626,7 +626,7 @@ export default function CreatePropertyPage() {
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
-                  required
+                  // required
                   rows={4}
                   className="w-full px-3 py-2 sm:px-4 sm:py-2 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] focus:border-transparent resize-none text-sm sm:text-base font-['Inter']"
                   placeholder="Detailed property description..."

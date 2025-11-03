@@ -6,23 +6,23 @@ const UnitTypeSchema = new mongoose.Schema(
   {
     type: {
       type: String,
-      required: true,
+      // // required: true,
       trim: true,
       // Examples: "Studio", "1 BHK", "2 BHK", "3 BHK", "4 BHK", "Villa", "Penthouse"
     },
     totalAreaStart: {
       type: Number,
-      required: true,
+      // // required: true,
       min: 0,
     },
     totalAreaEnd: {
       type: Number,
-      required: true,
+      // // required: true,
       min: 0,
     },
     price: {
       type: Number,
-      required: true,
+      // // required: true,
       min: 0,
     },
   },
@@ -35,7 +35,7 @@ const PropertySchema = new mongoose.Schema(
     // --- Property Images (Array) ---
     images: {
       type: [String],
-      required: true,
+      // // required: true,
       validate: {
         validator: function (v) {
           return v && v.length > 0;
@@ -47,14 +47,14 @@ const PropertySchema = new mongoose.Schema(
     // --- Basic Information ---
     title: {
       type: String,
-      required: true,
+      // // required: true,
       trim: true,
     },
 
     // --- NEW: Property Type ---
     propertyType: {
       type: String,
-      required: true,
+      // // required: true,
       trim: true,
       // Examples: "Apartment", "Villa", "Townhouse", "Penthouse", "Studio"
     },
@@ -62,14 +62,14 @@ const PropertySchema = new mongoose.Schema(
     // --- NEW: City ---
     city: {
       type: String,
-      required: true,
+      // // required: true,
       trim: true,
       // Examples: "Dubai", "Abu Dhabi", "Sharjah", "Ajman"
     },
 
     location: {
       type: String,
-      required: true,
+      // // required: true,
       trim: true,
       // Specific location/area within the city
     },
@@ -77,13 +77,13 @@ const PropertySchema = new mongoose.Schema(
     // --- NEW: Property Status ---
     propertyStatus: {
       type: String,
-      required: true,
+      // // required: true,
       enum: ["Rent", "Buy", "Off-Plan"],
     },
 
     startingPrice: {
       type: Number,
-      required: true,
+      // // required: true,
       min: 0,
     },
 
@@ -94,46 +94,46 @@ const PropertySchema = new mongoose.Schema(
     // --- Property Details ---
     bhkCount: {
       type: Number,
-      required: true,
+      // // required: true,
       min: 0,
     },
 
     bathCount: {
       type: Number,
-      required: true,
+      // // required: true,
       min: 0,
     },
 
     totalArea: {
       type: Number,
-      required: true,
+      // // required: true,
       min: 0,
     },
 
     description: {
       type: String,
-      required: true,
+      // // required: true,
       trim: true,
     },
 
     // --- Developer Information ---
     developer: {
       type: String,
-      required: true,
+      // // required: true,
       trim: true,
     },
 
     // --- USP (Unique Selling Points) ---
     usp: {
       type: String,
-      required: true,
+      // // required: true,
       trim: true,
     },
 
     // --- Construction Status ---
     constructionStatus: {
       type: String,
-      required: true,
+      // // required: true,
       enum: [
         "Off-Plan",
         "Under Construction",
@@ -147,7 +147,7 @@ const PropertySchema = new mongoose.Schema(
     // --- Handover ---
     handover: {
       type: String,
-      required: true,
+      // // required: true,
       trim: true,
       // Example: "Q2 2028", "December 2025", "2026"
     },
@@ -155,14 +155,14 @@ const PropertySchema = new mongoose.Schema(
     // --- Floors ---
     floors: {
       type: Number,
-      required: true,
+      // // required: true,
       min: 0,
     },
 
     // --- Elevation ---
     elevation: {
       type: String,
-      required: true,
+      // // required: true,
       trim: true,
       // Example: "G+2P+17+R"
     },
@@ -170,7 +170,7 @@ const PropertySchema = new mongoose.Schema(
     // --- Payment Plan (Simple String) ---
     paymentPlan: {
       type: String,
-      required: true,
+      // // required: true,
       trim: true,
       // Example: "40% During Construction, 60% On Completion"
     },
@@ -178,14 +178,14 @@ const PropertySchema = new mongoose.Schema(
     // --- Total Units ---
     totalUnits: {
       type: Number,
-      required: true,
+      // // required: true,
       min: 0,
     },
 
     // --- Views ---
     views: {
       type: String,
-      required: true,
+      // required: true,
       trim: true,
       // Example: "Al Barari, Majan Park, Global Village"
     },
@@ -193,7 +193,7 @@ const PropertySchema = new mongoose.Schema(
     // --- Unit Types (Array of different unit configurations) ---
     unitTypes: {
       type: [UnitTypeSchema],
-      required: true,
+      // required: true,
       validate: {
         validator: function (v) {
           return v && v.length > 0;
@@ -217,7 +217,7 @@ const PropertySchema = new mongoose.Schema(
     // --- Amenities (Array) ---
     amenities: {
       type: [String],
-      required: true,
+      // required: true,
       validate: {
         validator: function (v) {
           return v && v.length > 0;
@@ -240,7 +240,6 @@ PropertySchema.index({ startingPrice: 1 });
 PropertySchema.index({ developer: 1 });
 PropertySchema.index({ bhkCount: 1 });
 PropertySchema.index({ constructionStatus: 1 });
-
 
 const Property =
   mongoose.models.Property || mongoose.model("Property", PropertySchema);

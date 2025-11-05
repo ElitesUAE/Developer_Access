@@ -36,12 +36,12 @@ const PropertySchema = new mongoose.Schema(
     images: {
       type: [String],
       // // required: true,
-      validate: {
-        validator: function (v) {
-          return v && v.length > 0;
-        },
-        message: "At least one image is required",
-      },
+      // validate: {
+      //   validator: function (v) {
+      //     return v && v.length > 0;
+      //   },
+      //   message: "At least one image is required",
+      // },
     },
 
     // --- Basic Information ---
@@ -194,36 +194,36 @@ const PropertySchema = new mongoose.Schema(
     unitTypes: {
       type: [UnitTypeSchema],
       // required: true,
-      validate: {
-        validator: function (v) {
-          return v && v.length > 0;
-        },
-        message: "At least one unit type is required",
-      },
+      // validate: {
+      //   validator: function (v) {
+      //     return v && v.length > 0;
+      //   },
+      //   message: "At least one unit type is required",
+      // },
     },
 
     // --- Highlights (Bullet Points Array) ---
     highlights: {
       type: [String],
       default: [],
-      validate: {
-        validator: function (v) {
-          return v.every((item) => item.trim().length > 0);
-        },
-        message: "Highlight items cannot be empty",
-      },
+      // validate: {
+      //   validator: function (v) {
+      //     return v.every((item) => item.trim().length > 0);
+      //   },
+      //   message: "Highlight items cannot be empty",
+      // },
     },
 
     // --- Amenities (Array) ---
     amenities: {
       type: [String],
       // required: true,
-      validate: {
-        validator: function (v) {
-          return v && v.length > 0;
-        },
-        message: "At least one amenity is required",
-      },
+      // validate: {
+      //   validator: function (v) {
+      //     return v && v.length > 0;
+      //   },
+      //   message: "At least one amenity is required",
+      // },
     },
   },
   {

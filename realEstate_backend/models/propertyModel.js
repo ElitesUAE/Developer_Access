@@ -78,7 +78,7 @@ const PropertySchema = new mongoose.Schema(
     propertyStatus: {
       type: String,
       // // required: true,
-      enum: ["Rent", "Buy", "Off-Plan"],
+      // enum: ["Rent", "Buy", "Off-Plan"],
     },
 
     startingPrice: {
@@ -134,14 +134,14 @@ const PropertySchema = new mongoose.Schema(
     constructionStatus: {
       type: String,
       // // required: true,
-      enum: [
-        "Off-Plan",
-        "Under Construction",
-        "Site Preparation Completed",
-        "Nearing Completion",
-        "Completed",
-        "Ready to Move",
-      ],
+      // enum: [
+      //   "Off-Plan",
+      //   "Under Construction",
+      //   "Site Preparation Completed",
+      //   "Nearing Completion",
+      //   "Completed",
+      //   "Ready to Move",
+      // ],
     },
 
     // --- Handover ---

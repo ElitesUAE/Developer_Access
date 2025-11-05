@@ -155,12 +155,12 @@ export default function CreatePropertyPage() {
     e.preventDefault();
 
     // Validate images
-    if (images.length === 0) {
-      toast.error("Please upload at least one image", {
-        icon: "📷",
-      });
-      return;
-    }
+    // if (images.length === 0) {
+    //   toast.error("Please upload at least one image", {
+    //     icon: "📷",
+    //   });
+    //   return;
+    // }
 
     // Filter out empty values
     const filteredUnitTypes = unitTypes.filter(
@@ -169,17 +169,17 @@ export default function CreatePropertyPage() {
     const filteredHighlights = highlights.filter((h) => h.trim() !== "");
     const filteredAmenities = amenities.filter((a) => a.trim() !== "");
 
-    // Validate unit types
-    if (filteredUnitTypes.length === 0) {
-      toast.error("Please add at least one unit type with all details filled");
-      return;
-    }
+    // // Validate unit types
+    // if (filteredUnitTypes.length === 0) {
+    //   toast.error("Please add at least one unit type with all details filled");
+    //   return;
+    // }
 
     // Validate amenities
-    if (filteredAmenities.length === 0) {
-      toast.error("Please add at least one amenity");
-      return;
-    }
+    // if (filteredAmenities.length === 0) {
+    //   toast.error("Please add at least one amenity");
+    //   return;
+    // }
 
     const loadingToast = toast.loading("Creating property...");
 

@@ -268,12 +268,12 @@ export default function EditPropertyPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (existingImages.length === 0 && newImages.length === 0) {
-      toast.error("Please have at least one image", {
-        icon: "📷",
-      });
-      return;
-    }
+    // if (existingImages.length === 0 && newImages.length === 0) {
+    //   toast.error("Please have at least one image", {
+    //     icon: "📷",
+    //   });
+    //   return;
+    // }
 
     const filteredUnitTypes = unitTypes.filter(
       (ut) => ut.type && ut.totalAreaStart && ut.totalAreaEnd && ut.price
@@ -281,15 +281,15 @@ export default function EditPropertyPage() {
     const filteredHighlights = highlights.filter((h) => h.trim() !== "");
     const filteredAmenities = amenities.filter((a) => a.trim() !== "");
 
-    if (filteredUnitTypes.length === 0) {
-      toast.error("Please add at least one unit type with all details filled");
-      return;
-    }
+    // if (filteredUnitTypes.length === 0) {
+    //   toast.error("Please add at least one unit type with all details filled");
+    //   return;
+    // }
 
-    if (filteredAmenities.length === 0) {
-      toast.error("Please add at least one amenity");
-      return;
-    }
+    // if (filteredAmenities.length === 0) {
+    //   toast.error("Please add at least one amenity");
+    //   return;
+    // }
 
     const loadingToast = toast.loading("Updating property...");
 
@@ -543,7 +543,7 @@ export default function EditPropertyPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
               <div className="md:col-span-2">
                 <label className="block text-xs sm:text-sm font-medium text-[#333333] mb-1.5 sm:mb-2 font-['Inter']">
-                  Property Title *
+                  Property Title
                 </label>
                 <input
                   type="text"
@@ -557,7 +557,7 @@ export default function EditPropertyPage() {
 
               <div>
                 <label className="block text-xs sm:text-sm font-medium text-[#333333] mb-1.5 sm:mb-2 font-['Inter']">
-                  Property Type *
+                  Property Type
                 </label>
                 <input
                   type="text"
@@ -571,7 +571,7 @@ export default function EditPropertyPage() {
 
               <div>
                 <label className="block text-xs sm:text-sm font-medium text-[#333333] mb-1.5 sm:mb-2 font-['Inter']">
-                  Property Status *
+                  Property Status
                 </label>
                 <Dropdown
                   options={[
@@ -591,7 +591,7 @@ export default function EditPropertyPage() {
 
               <div>
                 <label className="block text-xs sm:text-sm font-medium text-[#333333] mb-1.5 sm:mb-2 font-['Inter']">
-                  City *
+                  City
                 </label>
                 <input
                   type="text"
@@ -605,7 +605,7 @@ export default function EditPropertyPage() {
 
               <div>
                 <label className="block text-xs sm:text-sm font-medium text-[#333333] mb-1.5 sm:mb-2 font-['Inter']">
-                  Location *
+                  Location
                 </label>
                 <input
                   type="text"
@@ -619,7 +619,7 @@ export default function EditPropertyPage() {
 
               <div>
                 <label className="block text-xs sm:text-sm font-medium text-[#333333] mb-1.5 sm:mb-2 font-['Inter']">
-                  Developer *
+                  Developer
                 </label>
                 <input
                   type="text"
@@ -633,7 +633,7 @@ export default function EditPropertyPage() {
 
               <div>
                 <label className="block text-xs sm:text-sm font-medium text-[#333333] mb-1.5 sm:mb-2 font-['Inter']">
-                  Construction Status *
+                  Construction Status
                 </label>
                 <Dropdown
                   options={[
@@ -675,7 +675,7 @@ export default function EditPropertyPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
               <div>
                 <label className="block text-xs sm:text-sm font-medium text-[#333333] mb-1.5 sm:mb-2 font-['Inter']">
-                  Starting Price (AED) *
+                  Starting Price (AED)
                 </label>
                 <input
                   type="number"
@@ -690,7 +690,7 @@ export default function EditPropertyPage() {
 
               <div>
                 <label className="block text-xs sm:text-sm font-medium text-[#333333] mb-1.5 sm:mb-2 font-['Inter']">
-                  BHK Count *
+                  BHK Count
                 </label>
                 <input
                   type="number"
@@ -705,7 +705,7 @@ export default function EditPropertyPage() {
 
               <div>
                 <label className="block text-xs sm:text-sm font-medium text-[#333333] mb-1.5 sm:mb-2 font-['Inter']">
-                  Bathrooms *
+                  Bathrooms
                 </label>
                 <input
                   type="number"
@@ -720,7 +720,7 @@ export default function EditPropertyPage() {
 
               <div>
                 <label className="block text-xs sm:text-sm font-medium text-[#333333] mb-1.5 sm:mb-2 font-['Inter']">
-                  Total Area (sqft) *
+                  Total Area (sqft)
                 </label>
                 <input
                   type="number"
@@ -735,7 +735,7 @@ export default function EditPropertyPage() {
 
               <div>
                 <label className="block text-xs sm:text-sm font-medium text-[#333333] mb-1.5 sm:mb-2 font-['Inter']">
-                  Floors *
+                  Floors
                 </label>
                 <input
                   type="number"
@@ -750,7 +750,7 @@ export default function EditPropertyPage() {
 
               <div>
                 <label className="block text-xs sm:text-sm font-medium text-[#333333] mb-1.5 sm:mb-2 font-['Inter']">
-                  Total Units *
+                  Total Units
                 </label>
                 <input
                   type="number"
@@ -765,7 +765,7 @@ export default function EditPropertyPage() {
 
               <div>
                 <label className="block text-xs sm:text-sm font-medium text-[#333333] mb-1.5 sm:mb-2 font-['Inter']">
-                  Elevation *
+                  Elevation
                 </label>
                 <input
                   type="text"
@@ -779,7 +779,7 @@ export default function EditPropertyPage() {
 
               <div>
                 <label className="block text-xs sm:text-sm font-medium text-[#333333] mb-1.5 sm:mb-2 font-['Inter']">
-                  Handover *
+                  Handover
                 </label>
                 <input
                   type="text"
@@ -793,7 +793,7 @@ export default function EditPropertyPage() {
 
               <div className="md:col-span-2">
                 <label className="block text-xs sm:text-sm font-medium text-[#333333] mb-1.5 sm:mb-2 font-['Inter']">
-                  Payment Plan *
+                  Payment Plan
                 </label>
                 <input
                   type="text"
@@ -807,7 +807,7 @@ export default function EditPropertyPage() {
 
               <div className="md:col-span-2">
                 <label className="block text-xs sm:text-sm font-medium text-[#333333] mb-1.5 sm:mb-2 font-['Inter']">
-                  Views *
+                  Views
                 </label>
                 <input
                   type="text"
@@ -821,7 +821,7 @@ export default function EditPropertyPage() {
 
               <div className="md:col-span-2">
                 <label className="block text-xs sm:text-sm font-medium text-[#333333] mb-1.5 sm:mb-2 font-['Inter']">
-                  USP (Unique Selling Points) *
+                  USP (Unique Selling Points)
                 </label>
                 <textarea
                   name="usp"
@@ -835,7 +835,7 @@ export default function EditPropertyPage() {
 
               <div className="md:col-span-2">
                 <label className="block text-xs sm:text-sm font-medium text-[#333333] mb-1.5 sm:mb-2 font-['Inter']">
-                  Description *
+                  Description
                 </label>
                 <textarea
                   name="description"
@@ -853,7 +853,7 @@ export default function EditPropertyPage() {
           <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 border border-[#CFAF4E]/20">
             <div className="flex items-center justify-between mb-3 sm:mb-4">
               <h2 className="font-['Playfair_Display'] text-lg sm:text-xl font-semibold text-[#0A2540]">
-                Unit Types * ({unitTypes.length})
+                Unit Types ({unitTypes.length})
               </h2>
               <button
                 type="button"
@@ -1005,7 +1005,7 @@ export default function EditPropertyPage() {
           <div className="bg-white rounded-lg shadow-md p-4 sm:p-6 border border-[#CFAF4E]/20">
             <div className="flex items-center justify-between mb-3 sm:mb-4">
               <h2 className="font-['Playfair_Display'] text-lg sm:text-xl font-semibold text-[#0A2540]">
-                Amenities * ({amenities.length})
+                Amenities ({amenities.length})
               </h2>
               <button
                 type="button"

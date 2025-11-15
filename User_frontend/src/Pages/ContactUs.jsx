@@ -17,6 +17,7 @@ import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import StructuredData from "../components/StructuredData";
 import useSEO from "../hooks/useSEO";
+import { useNavigate } from "react-router-dom";
 
 const ContactUs = () => {
   const { createContact, loading } = useContactStore();
@@ -26,6 +27,7 @@ const ContactUs = () => {
     phone: "",
     message: "",
   });
+  const navigate = useNavigate();
   const [feedbackMessage, setFeedbackMessage] = useState(null); // { type: 'success' | 'error' | 'info', message: string }
 
   const handleSubmit = async (e) => {
@@ -71,6 +73,8 @@ const ContactUs = () => {
       setTimeout(() => {
         setFeedbackMessage(null);
       }, 6000);
+
+      navigate("/thankyou");
     } catch (error) {
       console.error("Error submitting form:", error);
       setFeedbackMessage({

@@ -8,7 +8,7 @@ const Layout = () => {
   return (
     <>
       {/* Main Layout */}
-      <ScrollToTop/>
+      <ScrollToTop />
       <main>
         <Outlet />
       </main>

@@ -15,6 +15,7 @@ import {
 import { useCallbackStore } from "../../store/useCallbackStore";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "../Button";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const CallbackModal = ({ isOpen, onClose, property }) => {
@@ -25,6 +26,7 @@ const CallbackModal = ({ isOpen, onClose, property }) => {
     successMessage,
     clearMessages,
   } = useCallbackStore();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -120,6 +122,8 @@ const CallbackModal = ({ isOpen, onClose, property }) => {
         onClose();
         setFeedbackMessage(null);
       }, 2500);
+
+      navigate("/thankyou");
     } catch (err) {
       setFeedbackMessage({
         type: "error",

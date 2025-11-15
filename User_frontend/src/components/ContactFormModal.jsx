@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useContactStore } from "../store/useContactStore";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const ContactFormModal = ({ isOpen, onClose, title, description }) => {
@@ -23,6 +24,7 @@ const ContactFormModal = ({ isOpen, onClose, title, description }) => {
     phone: "",
     message: "",
   });
+  const navigate = useNavigate();
   const [feedbackMessage, setFeedbackMessage] = useState(null); // { type: 'success' | 'error', message: string }
 
   // Prevent body scroll when modal is open
@@ -94,6 +96,7 @@ const ContactFormModal = ({ isOpen, onClose, title, description }) => {
         onClose();
         setFeedbackMessage(null);
       }, 2500);
+      navigate("/thankyou");
     } catch (error) {
       console.error("Error submitting form:", error);
       setFeedbackMessage({

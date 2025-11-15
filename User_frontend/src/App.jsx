@@ -74,6 +74,7 @@ import BlogPage from "./Pages/BlogPage.jsx";
 import BlogDetailsPage from "./Pages/BlogDetailsPage.jsx";
 import Layout from "./Pages/Layout.jsx";
 import ThankYou from "./Pages/ThankYou.jsx";
+import Policy from "./Pages/Policy.jsx";
 
 function AppContent() {
   const location = useLocation();
@@ -94,6 +95,7 @@ function AppContent() {
           <Route path="/property/:id" element={<PropertyDetailsPage />} />
           <Route path="/blogs" element={<BlogPage />} />
           <Route path="/blogs/:id" element={<BlogDetailsPage />} />
+          <Route path="/privacy-policy" element={<Policy />} />
         </Route>
 
         {/* Thank You Page – No Navbar, No Footer */}

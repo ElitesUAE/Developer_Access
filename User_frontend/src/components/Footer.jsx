@@ -261,6 +261,18 @@ function Footer() {
                   </Link>
                 </li>
               ))}
+
+              {/* Add Privacy Policy link */}
+              <li>
+                <Link
+                  to="/privacy-policy"
+                  className="group text-base sm:text-lg text-gray-200 transition-all duration-300 ease-in-out"
+                >
+                  <span className="bg-left-bottom bg-gradient-to-r from-[--accent-color] to-[--accent-color] bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out hover:cursor-pointer hover:text-[--accent-color]">
+                    Privacy Policy
+                  </span>
+                </Link>
+              </li>
             </ul>
           </motion.div>
 
@@ -349,15 +361,33 @@ function Footer() {
           </motion.div>
         </motion.div>
 
-        {/* Copyright */}
+        {/* Copyright + Legal */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.8 }}
-          className="mt-6 md:mt-8 pt-2 border-t border-white/20 text-center text-xs sm:text-sm text-gray-400"
+          className="mt-8 md:mt-10 pt-4 border-t border-white/15"
         >
-          © {new Date().getFullYear()} — Elite In Emirates. All Rights Reserved.
+          <div className="flex flex-col md:flex-row items-center justify-between gap-2 md:gap-4 text-xs sm:text-sm text-gray-400">
+            {/* Left: Copyright */}
+            <div className="text-center md:text-left">
+              © {new Date().getFullYear()} — Elite In Emirates. All Rights
+              Reserved.
+            </div>
+
+            {/* Right: Legal links */}
+            <div className="flex items-center gap-4 text-center md:text-right">
+              <Link
+                to="/privacy-policy"
+                className="text-gray-300 hover:text-[--accent-color] underline underline-offset-4 decoration-white/30 hover:decoration-[--accent-color] transition"
+              >
+                Privacy Policy
+              </Link>
+              {/* If later you add more links, they line up nicely here */}
+              {/* <Link ...>Terms of Use</Link> */}
+            </div>
+          </div>
         </motion.div>
       </div>
     </footer>

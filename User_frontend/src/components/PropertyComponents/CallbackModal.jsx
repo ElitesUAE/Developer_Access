@@ -10,13 +10,11 @@ import {
   Loader2,
   CheckCircle2,
   AlertCircle,
-  Info,
 } from "lucide-react";
 import { useCallbackStore } from "../../store/useCallbackStore";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "../Button";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 
 const CallbackModal = ({ isOpen, onClose, property }) => {
   const {
@@ -37,9 +35,11 @@ const CallbackModal = ({ isOpen, onClose, property }) => {
   });
 
   const [errors, setErrors] = useState({});
-  const [feedbackMessage, setFeedbackMessage] = useState(null); // { type: 'success' | 'error', message: string }
+  const [feedbackMessage, setFeedbackMessage] = useState(null);
 
-  // Clear form when modal opens
+  // NEW STATE for checkbox
+  const [acceptedPolicy, setAcceptedPolicy] = useState(false);
+
   useEffect(() => {
     if (isOpen) {
       setFormData({
@@ -51,24 +51,20 @@ const CallbackModal = ({ isOpen, onClose, property }) => {
       });
       setErrors({});
       setFeedbackMessage(null);
+      setAcceptedPolicy(false); // reset checkbox
       clearMessages();
     }
   }, [isOpen]);
 
-  // Close modal when clicking outside
   const handleBackdropClick = (e) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
+    if (e.target === e.currentTarget) onClose();
   };
 
-  // Validate form
+  // Validation
   const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
-    }
+    if (!formData.name.trim()) newErrors.name = "Name is required";
 
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
@@ -82,15 +78,19 @@ const CallbackModal = ({ isOpen, onClose, property }) => {
       newErrors.phone = "Invalid phone number";
     }
 
+    // NEW CHECKBOX VALIDATION
+    if (!acceptedPolicy) {
+      newErrors.policy =
+        "You must accept the Privacy Policy before submitting.";
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  // Handle form submission
+  // Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Clear previous feedback
     setFeedbackMessage(null);
 
     if (!validateForm()) {
@@ -110,14 +110,12 @@ const CallbackModal = ({ isOpen, onClose, property }) => {
 
       await submitCallbackRequest(requestData);
 
-      // Show inline success message
       setFeedbackMessage({
         type: "success",
         message:
           "Callback request submitted successfully! 🎉 We'll contact you soon.",
       });
 
-      // Close modal after 2.5 seconds to allow user to see success message
       setTimeout(() => {
         onClose();
         setFeedbackMessage(null);
@@ -162,7 +160,7 @@ const CallbackModal = ({ isOpen, onClose, property }) => {
 
         {/* Property Info */}
         <div className="px-6 py-4 bg-[#F4F4F4] border-b border-[#CFAF4E]/20">
-          <p className="text-sm text-[#333333]/70 font-['Inter'] mb-1">
+          <p className="text-sm text-[#333333]/70 mb-1 font-['Inter']">
             Interested in:
           </p>
           <h3 className="font-['Playfair_Display'] text-lg font-semibold text-[#0A2540]">
@@ -174,134 +172,143 @@ const CallbackModal = ({ isOpen, onClose, property }) => {
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="px-6 py-6">
-          <div className="space-y-5">
-            {/* Name */}
-            <div>
-              <label className="block text-sm font-medium text-[#333333] mb-2 font-['Inter']">
-                <User className="inline text-[#CFAF4E]" size={16} /> Full Name *
-              </label>
-              <input
-                type="text"
-                value={formData.name}
-                onChange={(e) =>
-                  setFormData({ ...formData, name: e.target.value })
-                }
-                placeholder="Enter your full name"
-                disabled={loading}
-                className={`w-full px-4 py-3 border ${
-                  errors.name ? "border-red-500" : "border-[#CFAF4E]/30"
-                } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#CFAF4E] font-['Inter'] transition-all duration-200 disabled:bg-gray-100 disabled:cursor-not-allowed`}
-              />
-              {errors.name && (
-                <p className="text-red-500 text-sm mt-1 font-['Inter']">
-                  {errors.name}
-                </p>
-              )}
-            </div>
-
-            {/* Email */}
-            <div>
-              <label className="block text-sm font-medium text-[#333333] mb-2 font-['Inter']">
-                <Mail className="inline text-[#CFAF4E]" size={16} /> Email
-                Address *
-              </label>
-              <input
-                type="email"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-                placeholder="your.email@example.com"
-                disabled={loading}
-                className={`w-full px-4 py-3 border ${
-                  errors.email ? "border-red-500" : "border-[#CFAF4E]/30"
-                } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#CFAF4E] font-['Inter'] transition-all duration-200 disabled:bg-gray-100 disabled:cursor-not-allowed`}
-              />
-              {errors.email && (
-                <p className="text-red-500 text-sm mt-1 font-['Inter']">
-                  {errors.email}
-                </p>
-              )}
-            </div>
-
-            {/* Phone */}
-            <div>
-              <label className="block text-sm font-medium text-[#333333] mb-2 font-['Inter']">
-                <Phone className="inline text-[#CFAF4E]" size={16} /> Phone
-                Number *
-              </label>
-              <input
-                type="tel"
-                value={formData.phone}
-                onChange={(e) =>
-                  setFormData({ ...formData, phone: e.target.value })
-                }
-                placeholder="+xx xx xxx xxxx"
-                disabled={loading}
-                className={`w-full px-4 py-3 border ${
-                  errors.phone ? "border-red-500" : "border-[#CFAF4E]/30"
-                } rounded-lg focus:outline-none focus:ring-2 focus:ring-[#CFAF4E] font-['Inter'] transition-all duration-200 disabled:bg-gray-100 disabled:cursor-not-allowed`}
-              />
-              {errors?.phone && (
-                <p className="text-red-500 text-sm mt-1 font-['Inter']">
-                  {errors.phone}
-                </p>
-              )}
-            </div>
-
-            {/* Preferred Time */}
-            <div>
-              <label className="block text-sm font-medium text-[#333333] mb-2 font-['Inter']">
-                <Clock className="inline text-[#CFAF4E]" size={16} /> Preferred
-                Callback Time
-              </label>
-              <select
-                value={formData.preferredTime}
-                onChange={(e) =>
-                  setFormData({ ...formData, preferredTime: e.target.value })
-                }
-                disabled={loading}
-                className="w-full px-4 py-3 border border-[#CFAF4E]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#CFAF4E] font-['Inter'] transition-all duration-200 disabled:bg-gray-100 disabled:cursor-not-allowed"
-              >
-                <option value="Anytime">Anytime</option>
-                <option value="Morning">Morning (9 AM - 12 PM)</option>
-                <option value="Afternoon">Afternoon (12 PM - 5 PM)</option>
-                <option value="Evening">Evening (5 PM - 8 PM)</option>
-              </select>
-            </div>
-
-            {/* Message */}
-            <div>
-              <label className="block text-sm font-medium text-[#333333] mb-2 font-['Inter']">
-                <MessageSquare className="inline text-[#CFAF4E]" size={16} />{" "}
-                Message (Optional)
-              </label>
-              <textarea
-                value={formData.message}
-                onChange={(e) =>
-                  setFormData({ ...formData, message: e.target.value })
-                }
-                placeholder="Tell us more about your requirements..."
-                rows={4}
-                maxLength={500}
-                disabled={loading}
-                className="w-full px-4 py-3 border border-[#CFAF4E]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#CFAF4E] font-['Inter'] resize-none transition-all duration-200 disabled:bg-gray-100 disabled:cursor-not-allowed"
-              />
-              <p className="text-xs text-[#333333]/60 mt-1 text-right font-['Inter']">
-                {formData.message.length}/500 characters
-              </p>
-            </div>
+        <form onSubmit={handleSubmit} className="px-6 py-6 space-y-5">
+          {/* Name */}
+          <div>
+            <label className="block text-sm font-medium text-[#333333] mb-2 font-['Inter']">
+              <User className="inline text-[#CFAF4E]" size={16} /> Full Name *
+            </label>
+            <input
+              type="text"
+              value={formData.name}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
+              className={`w-full px-4 py-3 border ${
+                errors.name ? "border-red-500" : "border-[#CFAF4E]/30"
+              } rounded-lg focus:ring-2 focus:ring-[#CFAF4E]`}
+            />
+            {errors.name && (
+              <p className="text-red-500 text-sm">{errors.name}</p>
+            )}
           </div>
 
-          {/* Submit Button */}
+          {/* Email */}
+          <div>
+            <label className="block text-sm font-medium text-[#333333] mb-2 font-['Inter']">
+              <Mail className="inline text-[#CFAF4E]" size={16} /> Email Address
+              *
+            </label>
+            <input
+              type="email"
+              value={formData.email}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+              className={`w-full px-4 py-3 border ${
+                errors.email ? "border-red-500" : "border-[#CFAF4E]/30"
+              } rounded-lg focus:ring-2 focus:ring-[#CFAF4E]`}
+            />
+            {errors.email && (
+              <p className="text-red-500 text-sm">{errors.email}</p>
+            )}
+          </div>
+
+          {/* Phone */}
+          <div>
+            <label className="block text-sm font-medium text-[#333333] mb-2 font-['Inter']">
+              <Phone className="inline text-[#CFAF4E]" size={16} /> Phone Number
+              *
+            </label>
+            <input
+              type="tel"
+              value={formData.phone}
+              onChange={(e) =>
+                setFormData({ ...formData, phone: e.target.value })
+              }
+              className={`w-full px-4 py-3 border ${
+                errors.phone ? "border-red-500" : "border-[#CFAF4E]/30"
+              } rounded-lg focus:ring-2 focus:ring-[#CFAF4E]`}
+            />
+            {errors.phone && (
+              <p className="text-red-500 text-sm">{errors.phone}</p>
+            )}
+          </div>
+
+          {/* Preferred Time */}
+          <div>
+            <label className="block text-sm font-medium text-[#333333] mb-2 font-['Inter']">
+              <Clock className="inline text-[#CFAF4E]" size={16} /> Preferred
+              Callback Time
+            </label>
+            <select
+              value={formData.preferredTime}
+              onChange={(e) =>
+                setFormData({ ...formData, preferredTime: e.target.value })
+              }
+              className="w-full px-4 py-3 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E]"
+            >
+              <option value="Anytime">Anytime</option>
+              <option value="Morning">Morning (9 AM - 12 PM)</option>
+              <option value="Afternoon">Afternoon (12 PM - 5 PM)</option>
+              <option value="Evening">Evening (5 PM - 8 PM)</option>
+            </select>
+          </div>
+
+          {/* Message */}
+          <div>
+            <label className="block text-sm font-medium text-[#333333] mb-2 font-['Inter']">
+              <MessageSquare className="inline text-[#CFAF4E]" size={16} />{" "}
+              Message (Optional)
+            </label>
+            <textarea
+              value={formData.message}
+              onChange={(e) =>
+                setFormData({ ...formData, message: e.target.value })
+              }
+              rows={4}
+              maxLength={500}
+              className="w-full px-4 py-3 border border-[#CFAF4E]/30 rounded-lg focus:ring-2 focus:ring-[#CFAF4E] resize-none"
+            />
+            <p className="text-xs text-[#333333]/60 mt-1 text-right">
+              {formData.message.length}/500 characters
+            </p>
+          </div>
+
+          {/* ✅ NEW CHECKBOX FIELD */}
+          <div>
+            <label className="flex items-start gap-3 cursor-pointer">
+              <input
+                type="checkbox"
+                checked={acceptedPolicy}
+                onChange={(e) => setAcceptedPolicy(e.target.checked)}
+                className="mt-1 w-4 h-4 accent-[#CFAF4E]"
+                disabled={loading}
+              />
+              <span className="text-sm text-[#333333] leading-tight font-['Inter']">
+                By submitting this form, you agree to our{" "}
+                <span
+                  onClick={() => navigate("/privacy-policy")}
+                  className="text-[#CFAF4E] underline cursor-pointer hover:text-[#b9973f]"
+                >
+                  Privacy Policy
+                </span>
+                .
+              </span>
+            </label>
+            {errors.policy && (
+              <p className="text-red-500 text-sm mt-1">{errors.policy}</p>
+            )}
+          </div>
+
+          {/* Submit Buttons */}
           <div className="mt-6 flex gap-3">
             <Button
               type="button"
               variant="outline"
               onClick={onClose}
-              className="flex-1"
               disabled={loading}
+              className="flex-1"
             >
               Cancel
             </Button>
@@ -318,30 +325,29 @@ const CallbackModal = ({ isOpen, onClose, property }) => {
             </Button>
           </div>
 
-          {/* ✅ INLINE FEEDBACK MESSAGE - Displayed Below Submit Buttons */}
+          {/* Feedback */}
           <AnimatePresence>
             {feedbackMessage && (
               <motion.div
-                initial={{ opacity: 0, y: -10, height: 0 }}
-                animate={{ opacity: 1, y: 0, height: "auto" }}
-                exit={{ opacity: 0, y: -10, height: 0 }}
-                transition={{ duration: 0.3 }}
-                className="overflow-hidden"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="mt-4"
               >
                 <div
-                  className={`mt-4 w-full px-4 py-3 rounded-lg flex items-start gap-3 ${
+                  className={`px-4 py-3 rounded-lg flex items-start gap-3 ${
                     feedbackMessage.type === "success"
                       ? "bg-green-500/20 border border-green-500/50"
                       : "bg-red-500/20 border border-red-500/50"
                   }`}
                 >
                   {feedbackMessage.type === "success" ? (
-                    <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                    <CheckCircle2 className="text-green-600 w-5 h-5 mt-0.5" />
                   ) : (
-                    <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                    <AlertCircle className="text-red-600 w-5 h-5 mt-0.5" />
                   )}
                   <p
-                    className={`text-sm sm:text-base font-medium font-['Inter'] ${
+                    className={`text-sm font-['Inter'] ${
                       feedbackMessage.type === "success"
                         ? "text-green-700"
                         : "text-red-700"
